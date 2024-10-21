@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Formulário</h1>
+
+    <form id="meuForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required>
+
+        <button type="button" onclick="gravarDados()">Gravar</button>
+        <button type="button" onclick="exibirDados()">Exibir</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function gravarDados() {
+            const nome = document.getElementById('nome').value;
+            const endereco = document.getElementById('endereco').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+
+            localStorage.setItem('nome', nome);
+            localStorage.setItem('endereco', endereco);
+            localStorage.setItem('email', email);
+            localStorage.setItem('telefone', telefone);
+
+            alert("Dados gravados com sucesso!");
+        }
+
+        function exibirDados() {
+            const nome = localStorage.getItem('nome');
+            const endereco = localStorage.getItem('endereco');
+            const email = localStorage.getItem('email');
+            const telefone = localStorage.getItem('telefone');
+
+            const resultDiv = document.getElementById('result');
+            if (nome && endereco && email && telefone) {
+                resultDiv.innerHTML = `
+                    <p><strong>Nome:</strong> ${nome}</p>
+                    <p><strong>Endereço:</strong> ${endereco}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Telefone:</strong> ${telefone}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p>Nenhum dado armazenado.</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
